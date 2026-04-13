@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lamborghini Super Trofeo Europe 2026 — Debriefs</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #161616;
+    --border: #2A2A2A;
+    --text: #E8E8E0;
+    --muted: #888880;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: flex;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .lang-btn {
+    padding: 6px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lang-btn.active {
+    background: var(--gold);
+    color: #000;
+  }
+
+  /* ── ROUND SELECTOR ── */
+  .round-nav {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .round-nav::-webkit-scrollbar { display: none; }
+
+  .round-tab {
+    padding: 18px 20px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .round-tab:hover { color: var(--text); }
+
+  .round-tab.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .round-tab.locked {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .round-tab .tab-round {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+  }
+
+  .round-tab .tab-circuit {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── COMING SOON ── */
+  .coming-soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 20px;
+    padding: 60px 24px;
+  }
+
+  .cs-round {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 1;
+    color: var(--border);
+  }
+
+  .cs-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .cs-date {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 16px;
+  }
+
+  .cs-sub {
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    padding: 60px 48px 48px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .header-title span { color: var(--gold); }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+
+  .header-meta {
+    margin-top: 36px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 64px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #C8C8C0;
+    margin-bottom: 14px;
+  }
+
+  /* ── CARDS ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .result-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .result-card-position {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .result-card-detail {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .result-card-detail strong { color: var(--text); font-weight: 500; }
+
+  .quali-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .quali-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .quali-card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .quali-card-pos {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--gold-light);
+  }
+
+  .quali-card-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .highlight {
+    border-left: 2px solid var(--gold);
+    padding: 16px 24px;
+    margin: 24px 0;
+    background: rgba(201,168,76,0.04);
+    border-radius: 0 4px 4px 0;
+    font-size: 15px;
+    font-style: italic;
+    color: #D8D8D0;
+    line-height: 1.7;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin: 8px 0 14px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-rdv {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+
+  .footer-rdv span {
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .footer-tag { font-size: 11px; color: var(--muted); text-align: right; letter-spacing: 0.05em; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .topbar { padding: 12px 20px; }
+    .round-nav { padding: 0 12px; }
+    .results-grid { grid-template-columns: 1fr; }
+    .quali-row { grid-template-columns: 1fr; }
+    main { padding: 40px 24px; }
+    header { padding: 40px 24px 36px; }
+    .header-meta { gap: 24px; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-brand">Super Trofeo Europe · 2026</div>
+  <div class="topbar-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROUND NAVIGATION -->
+<div class="round-nav">
+  <button class="round-tab active" onclick="showRound('r1')" id="tab-r1">
+    <span class="tab-round" data-fr="Round 1" data-en="Round 1">Round 1</span>
+    <span class="tab-circuit">Paul Ricard</span>
+  </button>
+  <button class="round-tab locked" onclick="showRound('r2')" id="tab-r2">
+    <span class="tab-round" data-fr="Round 2" data-en="Round 2">Round 2</span>
+    <span class="tab-circuit">Imola</span>
+  </button>
+  <button class="round-tab locked" onclick="showRound('r3')" id="tab-r3">
+    <span class="tab-round" data-fr="Round 3" data-en="Round 3">Round 3</span>
+    <span class="tab-circuit">Spa-Francorchamps</span>
+  </button>
+  <button class="round-tab locked" onclick="showRound('r4')" id="tab-r4">
+    <span class="tab-round" data-fr="Round 4" data-en="Round 4">Round 4</span>
+    <span class="tab-circuit">Nürburgring</span>
+  </button>
+  <button class="round-tab locked" onclick="showRound('r5')" id="tab-r5">
+    <span class="tab-round" data-fr="Round 5" data-en="Round 5">Round 5</span>
+    <span class="tab-circuit">Barcelona</span>
+  </button>
+  <button class="round-tab locked" onclick="showRound('r6')" id="tab-r6">
+    <span class="tab-round" data-fr="Round 6" data-en="Round 6">Round 6</span>
+    <span class="tab-circuit">Monza</span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════
+     ROUND 1 — LE CASTELLET
+══════════════════════════════════════ -->
+<div class="page active" id="page-r1">
+
+  <header>
+    <div class="header-eyebrow" data-fr="Débriefing Officiel" data-en="Official Debrief">Débriefing Officiel</div>
+    <div class="header-title">Round 1<br><span>Le Castellet</span></div>
+    <div class="header-sub" data-fr="Lamborghini Super Trofeo Europe · 2026" data-en="Lamborghini Super Trofeo Europe · 2026">Lamborghini Super Trofeo Europe · 2026</div>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label" data-fr="Circuit" data-en="Circuit">Circuit</span>
+        <span class="meta-value">Circuit Paul Ricard</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label" data-fr="Championnat" data-en="Championship">Championnat</span>
+        <span class="meta-value">Super Trofeo Europe</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label" data-fr="Voiture" data-en="Car">Voiture</span>
+        <span class="meta-value">Lamborghini Huracán ST EVO2</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label" data-fr="Statut" data-en="Status">Statut</span>
+        <span class="meta-value" data-fr="Nouvelle équipe · Nouvelle voiture" data-en="New team · New car">Nouvelle équipe · Nouvelle voiture</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="section">
+      <div class="section-label" data-fr="Contexte" data-en="Context">Contexte</div>
+      <div class="section-title" data-fr="Retour en piste" data-en="Back on track">Retour en piste</div>
+      <p data-fr="Après une année complète sans roulage, ce premier round de la saison 2026 représentait un véritable défi de remise en conditions. Dès les premières sessions, j'ai rapidement retrouvé mes repères et su m'adapter au rythme de la compétition — un signe encourageant pour la suite du championnat."
+         data-en="After a full year away from racing, this first round of the 2026 season was a genuine challenge to get back up to speed. From the very first sessions, I quickly found my rhythm and adapted to the competitive pace — an encouraging sign for the rest of the championship.">
+        Après une année complète sans roulage, ce premier round de la saison 2026 représentait un véritable défi de remise en conditions. Dès les premières sessions, j'ai rapidement retrouvé mes repères et su m'adapter au rythme de la compétition — un signe encourageant pour la suite du championnat.
+      </p>
+      <p data-fr="Ce weekend était également marqué par une double nouveauté : une nouvelle voiture et une nouvelle équipe. Ces transitions, toujours délicates en début de saison, ont demandé un travail important d'adaptation, aussi bien sur le plan technique qu'humain."
+         data-en="This weekend was also defined by a double challenge: a new car and a new team. These transitions, always delicate at the start of a season, required significant adaptation work, both technically and as a group.">
+        Ce weekend était également marqué par une double nouveauté : une nouvelle voiture et une nouvelle équipe. Ces transitions, toujours délicates en début de saison, ont demandé un travail important d'adaptation, aussi bien sur le plan technique qu'humain.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Essais Libres" data-en="Free Practice">Essais Libres</div>
+      <div class="section-title" data-fr="Prise en main & apprentissage" data-en="Getting to grips">Prise en main & apprentissage</div>
+      <p data-fr="Les séances d'essais libres ont été exigeantes. Classée en <strong>20ème position</strong> au général, la journée a mis en lumière la principale difficulté du weekend : comprendre et apprivoiser le comportement de la Lamborghini Huracán, une philosophie de conduite radicalement différente de ce que j'avais développé en Porsche."
+         data-en="Free practice sessions were demanding. Classified in <strong>20th position</strong> overall, the day highlighted the main challenge of the weekend: understanding and taming the Lamborghini Huracán, a driving philosophy radically different from what I had developed in a Porsche.">
+        Les séances d'essais libres ont été exigeantes. Classée en <strong>20ème position</strong> au général, la journée a mis en lumière la principale difficulté du weekend : comprendre et apprivoiser le comportement de la Lamborghini Huracán, une philosophie de conduite radicalement différente de ce que j'avais développé en Porsche.
+      </p>
+      <div class="highlight"
+           data-fr="« La voiture fonctionne à l'inverse de mes réflexes acquis en Porsche. Il fallait tout réapprendre — la gestion des trains, l'attaque des vibreurs, les points de corde — en un minimum de temps. »"
+           data-en="&ldquo;The car works the opposite way to the reflexes I had built in a Porsche. Everything had to be relearned — weight transfer management, kerb attack, apex points — in minimum time.&rdquo;">
+        « La voiture fonctionne à l'inverse de mes réflexes acquis en Porsche. Il fallait tout réapprendre — la gestion des trains, l'attaque des vibreurs, les points de corde — en un minimum de temps. »
+      </div>
+      <p data-fr="Ce temps d'adaptation, inévitable lors d'une première prise en main, a constitué la base de travail essentielle pour orienter les réglages des qualifications."
+         data-en="This adaptation period, inevitable on a first outing, provided the essential foundation to guide the setup direction heading into qualifying.">
+        Ce temps d'adaptation, inévitable lors d'une première prise en main, a constitué la base de travail essentielle pour orienter les réglages des qualifications.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Qualifications" data-en="Qualifying">Qualifications</div>
+      <div class="section-title" data-fr="Un setup qui change tout" data-en="A setup that changed everything">Un setup qui change tout</div>
+      <p data-fr="Fort des observations des essais, l'équipe a décidé de changer radicalement de direction avec un nouveau setup pour les qualifications. Le résultat a été immédiat : la voiture est devenue plus accessible, plus lisible, permettant d'exprimer pleinement le potentiel du package."
+         data-en="Building on the observations from practice, the team made a bold setup change heading into qualifying. The result was immediate: the car became more accessible and more predictable, allowing us to fully unlock the package's potential.">
+        Fort des observations des essais, l'équipe a décidé de changer radicalement de direction avec un nouveau setup pour les qualifications. Le résultat a été immédiat : la voiture est devenue plus accessible, plus lisible, permettant d'exprimer pleinement le potentiel du package.
+      </p>
+      <div class="quali-row">
+        <div class="quali-card">
+          <div class="quali-card-label" data-fr="Essais Libres" data-en="Free Practice">Essais Libres</div>
+          <div class="quali-card-pos">P20</div>
+          <div class="quali-card-sub" data-fr="Classement général" data-en="Overall classification">Classement général</div>
+        </div>
+        <div class="quali-card">
+          <div class="quali-card-label" data-fr="Qualif. Course 1" data-en="Quali. Race 1">Qualif. Course 1</div>
+          <div class="quali-card-pos">P16</div>
+          <div class="quali-card-sub">Nathanaël</div>
+        </div>
+        <div class="quali-card">
+          <div class="quali-card-label" data-fr="Qualif. Course 2" data-en="Quali. Race 2">Qualif. Course 2</div>
+          <div class="quali-card-pos">P3</div>
+          <div class="quali-card-sub" data-fr="Moi" data-en="Me">Moi</div>
+        </div>
+      </div>
+      <p style="margin-top:20px;"
+         data-fr="Une 3ème place en qualifications pour la Course 2 est une belle démonstration de la progression réalisée en l'espace d'une seule journée — et une base solide pour aborder les deux courses."
+         data-en="A 3rd place in qualifying for Race 2 is a strong demonstration of the progress made in the space of a single day — and a solid foundation heading into both races.">
+        Une 3ème place en qualifications pour la Course 2 est une belle démonstration de la progression réalisée en l'espace d'une seule journée — et une base solide pour aborder les deux courses.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Course 1" data-en="Race 1">Course 1</div>
+      <div class="section-title" data-fr="Remontée collective" data-en="A collective charge forward">Remontée collective</div>
+      <p data-fr="Nathanaël a réalisé un départ remarquable, gagnant <strong>6 positions</strong> dans les premiers instants de la course. Un momentum positif qui a posé les bases d'une belle remontée."
+         data-en="Nathanaël delivered a remarkable start, gaining <strong>6 positions</strong> in the opening moments of the race — a positive momentum that set the stage for a strong recovery.">
+        Nathanaël a réalisé un départ remarquable, gagnant <strong>6 positions</strong> dans les premiers instants de la course. Un momentum positif qui a posé les bases d'une belle remontée.
+      </p>
+      <p data-fr="Lors du pit stop et du changement de pilote, j'ai repris le volant en <strong>20ème position</strong>. Grâce à un rythme soutenu et une gestion maîtrisée des pneus et du trafic, j'ai su remonter jusqu'en <strong>10ème position au général</strong> et <strong>6ème en catégorie Pro</strong> — soit une progression de 10 positions depuis ma reprise de la voiture."
+         data-en="After the pit stop and driver change, I rejoined in <strong>20th position</strong>. Through a consistent pace and disciplined management of tyres and traffic, I climbed back to <strong>10th overall</strong> and <strong>6th in the Pro class</strong> — a gain of 10 positions from the point I took over the car.">
+        Lors du pit stop et du changement de pilote, j'ai repris le volant en <strong>20ème position</strong>. Grâce à un rythme soutenu et une gestion maîtrisée des pneus et du trafic, j'ai su remonter jusqu'en <strong>10ème position au général</strong> et <strong>6ème en catégorie Pro</strong> — soit une progression de 10 positions depuis ma reprise de la voiture.
+      </p>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-card-label" data-fr="Position au Général" data-en="Overall Position">Position au Général</div>
+          <div class="result-card-position">P10</div>
+          <div class="result-card-detail" data-fr="Remontée depuis la <strong>P20</strong> après le pit stop" data-en="Recovery from <strong>P20</strong> after the pit stop">Remontée depuis la <strong>P20</strong> après le pit stop</div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-label" data-fr="Catégorie Pro" data-en="Pro Class">Catégorie Pro</div>
+          <div class="result-card-position">P6</div>
+          <div class="result-card-detail" data-fr="+6 pos. Nathanaël au départ · +10 pos. après reprise" data-en="+6 pos. Nathanaël at start · +10 pos. after takeover">+6 pos. Nathanaël au départ · +10 pos. après reprise</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Course 2" data-en="Race 2">Course 2</div>
+      <div class="section-title" data-fr="Podium visé, apprentissages récoltés" data-en="Podium targeted, lessons earned">Podium visé, apprentissages récoltés</div>
+      <p data-fr="Élancé depuis la <strong>3ème position</strong>, j'ai réussi à tenir ma place au départ et à conserver le top 3 dans les premiers tours. Le début de course a néanmoins été exigeant : la voiture présentait des difficultés de stabilité qui ont demandé une adaptation constante de la conduite pour limiter les pertes de temps."
+         data-en="Starting from <strong>3rd position</strong>, I held my place at the start and maintained the top 3 through the opening laps. The early stages of the race were nonetheless demanding: the car showed stability issues that required constant driving adaptation to limit time losses.">
+        Élancé depuis la <strong>3ème position</strong>, j'ai réussi à tenir ma place au départ et à conserver le top 3 dans les premiers tours. Le début de course a néanmoins été exigeant : la voiture présentait des difficultés de stabilité qui ont demandé une adaptation constante de la conduite pour limiter les pertes de temps.
+      </p>
+      <p data-fr="Nathanaël a ensuite repris le volant en <strong>5ème position</strong> et a assuré un travail de haute qualité pour tenir ce rang. Malheureusement, une <strong>pénalité de 20 secondes</strong> est venue contrecarrer nos espoirs d'un résultat dans le top 5."
+         data-en="Nathanaël then took over in <strong>5th position</strong> and delivered a high-quality stint to hold that place. Unfortunately, a <strong>20-second penalty</strong> dashed our hopes of a top 5 result.">
+        Nathanaël a ensuite repris le volant en <strong>5ème position</strong> et a assuré un travail de haute qualité pour tenir ce rang. Malheureusement, une <strong>pénalité de 20 secondes</strong> est venue contrecarrer nos espoirs d'un résultat dans le top 5.
+      </p>
+      <div class="badge" data-fr="⚠ Pénalité — +20 secondes" data-en="⚠ Penalty — +20 seconds">⚠ Pénalité — +20 secondes</div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-card-label" data-fr="Position au Général" data-en="Overall Position">Position au Général</div>
+          <div class="result-card-position">P10</div>
+          <div class="result-card-detail" data-fr="Sans pénalité : <strong>P5</strong> visé" data-en="Without penalty: <strong>P5</strong> targeted">Sans pénalité : <strong>P5</strong> visé</div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-label" data-fr="Catégorie Pro" data-en="Pro Class">Catégorie Pro</div>
+          <div class="result-card-position">P7</div>
+          <div class="result-card-detail" data-fr="Qualif. <strong>P3</strong> · Départ solide conservé" data-en="Quali. <strong>P3</strong> · Strong start held">Qualif. <strong>P3</strong> · Départ solide conservé</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Remerciements" data-en="Thanks">Remerciements</div>
+      <div class="section-title" data-fr="L'équipe & les partenaires" data-en="The team & partners">L'équipe & les partenaires</div>
+      <p data-fr="Ce premier round n'aurait pas été possible sans l'investissement total de l'ensemble de l'équipe. Le travail réalisé entre les essais et les qualifications — notamment le changement de setup — illustre parfaitement la réactivité et l'expertise du groupe. Je leur adresse toute ma gratitude."
+         data-en="This first round would not have been possible without the total commitment of the entire team. The work carried out between practice and qualifying — in particular the setup change — perfectly illustrates the group's reactivity and expertise. My deepest thanks to all of them.">
+        Ce premier round n'aurait pas été possible sans l'investissement total de l'ensemble de l'équipe. Le travail réalisé entre les essais et les qualifications — notamment le changement de setup — illustre parfaitement la réactivité et l'expertise du groupe. Je leur adresse toute ma gratitude.
+      </p>
+      <p data-fr="Je remercie également chaleureusement tous mes sponsors et partenaires pour leur soutien indéfectible. Leur confiance est le carburant qui permet à ce projet d'exister et de se développer. Sans eux, rien de tout cela ne serait possible."
+         data-en="I also warmly thank all my sponsors and partners for their unwavering support. Their trust is the fuel that allows this project to exist and grow. Without them, none of this would be possible.">
+        Je remercie également chaleureusement tous mes sponsors et partenaires pour leur soutien indéfectible. Leur confiance est le carburant qui permet à ce projet d'exister et de se développer. Sans eux, rien de tout cela ne serait possible.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-label" data-fr="Prochaines étapes" data-en="Next steps">Prochaines étapes</div>
+      <div class="section-title" data-fr="Analyse & progression" data-en="Analysis & progression">Analyse & progression</div>
+      <p data-fr="Ce weekend est une base de travail précieuse. Il est maintenant temps de dépouiller les données, revoir les vidéos embarquées et analyser en détail chaque phase de course afin d'identifier les axes d'amélioration — que ce soit sur la stabilité en course, la compréhension des réglages ou la gestion des situations de trafic."
+         data-en="This weekend is a valuable working foundation. It is now time to analyse the data, review the onboard footage and go through each phase of the race in detail to identify the areas for improvement — whether on race stability, setup understanding or traffic management.">
+        Ce weekend est une base de travail précieuse. Il est maintenant temps de dépouiller les données, revoir les vidéos embarquées et analyser en détail chaque phase de course afin d'identifier les axes d'amélioration — que ce soit sur la stabilité en course, la compréhension des réglages ou la gestion des situations de trafic.
+      </p>
+      <div class="highlight"
+           data-fr="« La progression entre les essais libres et les qualifications montre que le potentiel est là. L'objectif est désormais d'atteindre ce niveau dès le début du prochain weekend. »"
+           data-en="&ldquo;The progress between free practice and qualifying shows the potential is there. The goal now is to reach that level from the very start of the next round.&rdquo;">
+        « La progression entre les essais libres et les qualifications montre que le potentiel est là. L'objectif est désormais d'atteindre ce niveau dès le début du prochain weekend. »
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-rdv">
+      <span data-fr="Prochain rendez-vous" data-en="Next round">Prochain rendez-vous</span>
+      <span data-fr="Round 2 · Imola — 9 & 10 Mai 2026" data-en="Round 2 · Imola — 9 & 10 May 2026">Round 2 · Imola — 9 & 10 Mai 2026</span>
+    </div>
+    <div class="footer-tag" data-fr="Lamborghini Super Trofeo Europe 2026<br>Débriefing Round 1 · Circuit Paul Ricard" data-en="Lamborghini Super Trofeo Europe 2026<br>Debrief Round 1 · Circuit Paul Ricard">
+      Lamborghini Super Trofeo Europe 2026<br>Débriefing Round 1 · Circuit Paul Ricard
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     ROUNDS 2–6 — COMING SOON
+══════════════════════════════════════ -->
+
+<div class="page" id="page-r2">
+  <div class="coming-soon">
+    <div class="cs-round">R2</div>
+    <div class="cs-title" data-fr="Imola · Italie" data-en="Imola · Italy">Imola · Italie</div>
+    <div class="cs-date">9 – 10 <span data-fr="Mai" data-en="May">Mai</span> 2026</div>
+    <div class="cs-sub" data-fr="Le débriefing sera publié après le weekend de course." data-en="The debrief will be published after the race weekend.">Le débriefing sera publié après le weekend de course.</div>
+  </div>
+</div>
+
+<div class="page" id="page-r3">
+  <div class="coming-soon">
+    <div class="cs-round">R3</div>
+    <div class="cs-title" data-fr="Spa-Francorchamps · Belgique" data-en="Spa-Francorchamps · Belgium">Spa-Francorchamps · Belgique</div>
+    <div class="cs-date">25 – 27 <span data-fr="Juin" data-en="June">Juin</span> 2026</div>
+    <div class="cs-sub" data-fr="Le débriefing sera publié après le weekend de course." data-en="The debrief will be published after the race weekend.">Le débriefing sera publié après le weekend de course.</div>
+  </div>
+</div>
+
+<div class="page" id="page-r4">
+  <div class="coming-soon">
+    <div class="cs-round">R4</div>
+    <div class="cs-title" data-fr="Nürburgring · Allemagne" data-en="Nürburgring · Germany">Nürburgring · Allemagne</div>
+    <div class="cs-date">28 – 30 <span data-fr="Août" data-en="August">Août</span> 2026</div>
+    <div class="cs-sub" data-fr="Le débriefing sera publié après le weekend de course." data-en="The debrief will be published after the race weekend.">Le débriefing sera publié après le weekend de course.</div>
+  </div>
+</div>
+
+<div class="page" id="page-r5">
+  <div class="coming-soon">
+    <div class="cs-round">R5</div>
+    <div class="cs-title" data-fr="Barcelona · Espagne" data-en="Barcelona · Spain">Barcelona · Espagne</div>
+    <div class="cs-date">2 – 4 <span data-fr="Octobre" data-en="October">Octobre</span> 2026</div>
+    <div class="cs-sub" data-fr="Le débriefing sera publié après le weekend de course." data-en="The debrief will be published after the race weekend.">Le débriefing sera publié après le weekend de course.</div>
+  </div>
+</div>
+
+<div class="page" id="page-r6">
+  <div class="coming-soon">
+    <div class="cs-round">R6</div>
+    <div class="cs-title" data-fr="Monza · Italie" data-en="Monza · Italy">Monza · Italie</div>
+    <div class="cs-date">21 – 23 <span data-fr="Octobre" data-en="October">Octobre</span> 2026</div>
+    <div class="cs-sub" data-fr="Le débriefing sera publié après le weekend de course." data-en="The debrief will be published after the race weekend.">Le débriefing sera publié après le weekend de course.</div>
+  </div>
+</div>
+
+<script>
+  let currentLang = 'fr';
+  let currentRound = 'r1';
+
+  // ── ROUND SWITCHER ──
+  function showRound(id) {
+    const tab = document.getElementById('tab-' + id);
+    if (tab.classList.contains('locked') && id !== 'r1') {
+      // Still allow navigation to locked rounds (coming soon)
+    }
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.round-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+    currentRound = id;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── LANGUAGE SWITCHER ──
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-fr][data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+  }
+</script>
+
+</body>
+</html>
